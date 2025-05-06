@@ -6,7 +6,7 @@ Welcome to **Vaibhav's Resto**, a fully responsive and visually engaging landing
 
 This project is a modern landing page for a fictional restaurant named **Vaibhav's Resto**. The page is designed to be clean, user-friendly, and functional. It features sections commonly found on restaurant websites, such as:
 
-- Home section with call-to-action
+- Hero section with call-to-action
 - About us
 - Menu highlights
 - Image gallery
