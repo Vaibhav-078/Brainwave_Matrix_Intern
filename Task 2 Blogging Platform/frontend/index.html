@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlogWave</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100 font-sans antialiased">
+
+    <header class="bg-white shadow-md">
+        <nav class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="#" class="text-2xl font-bold text-gray-900 home-nav-link">BlogWave</a>
+
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#" class="text-gray-600 hover:text-blue-700 transition-colors home-nav-link">Home</a>
+                <a href="#" id="desktop-my-blogs-nav" class="text-gray-600 hover:text-blue-700 transition-colors my-blogs-nav-link hidden">My Blogs</a>
+                <div class="flex items-center space-x-4 ml-auto" id="desktop-auth-nav-item">
+                </div>
+            </div>
+
+            <div class="md:hidden">
+                <button id="nav-toggle" class="text-gray-500 hover:text-gray-700 focus:outline-none focus:text-gray-700">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="md:hidden hidden bg-white shadow-lg py-2">
+            <a href="#" class="block py-2 px-4 text-gray-700 hover:bg-gray-100 home-nav-link">Home</a>
+            <a href="#" id="my-blogs-nav" class="block py-2 px-4 text-gray-700 hover:bg-gray-100 my-blogs-nav-link hidden">My Blogs</a>
+            <div id="auth-nav-item" class="py-2 px-4">
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <section id="home-page" class="hidden">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6">Latest Blog Posts</h2>
+            <div class="mb-6 flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4">
+                <input type="text" id="search-input" placeholder="Search posts..." class="flex-grow p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select id="category-filter" class="p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option value="">All Categories</option>
+                    <option value="Technology">Technology</option>
+                    <option value="Travel">Travel</option>
+                    <option value="Food">Food</option>
+                    <option value="Lifestyle">Lifestyle</option>
+                    <option value="Health">Health</option>
+                </select>
+                <button id="apply-filter-btn" class="bg-blue-600 text-white px-5 py-3 rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500">Apply Filter</button>
+            </div>
+            <div id="blog-posts-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                </div>
+        </section>
+
+        <section id="single-post-page" class="hidden max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+            <button id="back-to-posts-btn" class="text-blue-600 hover:text-blue-800 flex items-center mb-6">
+                <svg data-feather="arrow-left" class="w-5 h-5 mr-1"></svg>
+                Back to all posts
+            </button>
+            <h1 id="blog-post-title" class="text-3xl font-bold text-gray-900 mb-4"></h1>
+            <div id="blog-post-content">
+                </div>
+
+            <hr class="my-8">
+
+            <h3 class="text-2xl font-semibold text-gray-900 mb-4">Comments</h3>
+            <div id="comments-container" class="space-y-4 mb-6">
+                </div>
+
+            <h4 class="text-xl font-semibold text-gray-900 mb-3">Add a Comment</h4>
+            <form id="comment-form" class="bg-gray-50 p-6 rounded-lg shadow-sm">
+                <input type="hidden" id="current-post-id">
+                <textarea id="comment-content-input" rows="4" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Write your comment..."></textarea>
+                <button type="submit" id="add-comment-btn" class="mt-4 bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500">Submit Comment</button>
+            </form>
+        </section>
+
+        <section id="create-post-page" class="hidden max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+            <h2 id="form-title" class="text-3xl font-bold text-gray-900 mb-6">Create New Blog Post</h2>
+            <form id="post-form">
+                <input type="hidden" id="post-id">
+                <div class="mb-4">
+                    <label for="post-title" class="block text-gray-700 text-sm font-bold mb-2">Title</label>
+                    <input type="text" id="post-title" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter post title" required>
+                </div>
+                <div class="mb-4">
+                    <label for="post-content" class="block text-gray-700 text-sm font-bold mb-2">Content</label>
+                    <textarea id="post-content" rows="10" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Write your blog post content here..." required></textarea>
+                </div>
+                <div class="mb-6">
+                    <label for="post-category" class="block text-gray-700 text-sm font-bold mb-2">Category</label>
+                    <select id="post-category" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                        <option value="">Select Category</option>
+                        <option value="Technology">Technology</option>
+                        <option value="Travel">Travel</option>
+                        <option value="Food">Food</option>
+                        <option value="Lifestyle">Lifestyle</option>
+                        <option value="Health">Health</option>
+                    </select>
+                </div>
+                <button type="submit" id="post-submit-btn" class="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500">Create Post</button>
+            </form>
+        </section>
+
+        <section id="login-page" class="hidden max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Login</h2>
+            <form id="login-form">
+                <div class="mb-4">
+                    <label for="login-email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                    <input type="email" id="login-email" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your email" required>
+                </div>
+                <div class="mb-6">
+                    <label for="login-password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                    <input type="password" id="login-password" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your password" required>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500">Login</button>
+            </form>
+            <p class="text-center text-gray-600 text-sm mt-4">
+                Don't have an account? <a href="#" id="register-link-from-login" class="text-blue-600 hover:underline">Register here</a>
+            </p>
+        </section>
+
+        <section id="register-page" class="hidden max-w-md mx-auto bg-white p-8 rounded-lg shadow-lg">
+            <h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Register</h2>
+            <form id="register-form">
+                <div class="mb-4">
+                    <label for="register-name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                    <input type="text" id="register-name" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your name" required>
+                </div>
+                <div class="mb-4">
+                    <label for="register-email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                    <input type="email" id="register-email" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your email" required>
+                </div>
+                <div class="mb-4">
+                    <label for="register-password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                    <input type="password" id="register-password" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Create a password" required>
+                </div>
+                <div class="mb-6">
+                    <label for="register-confirm-password" class="block text-gray-700 text-sm font-bold mb-2">Confirm Password</label>
+                    <input type="password" id="register-confirm-password" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Confirm your password" required>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500">Register</button>
+            </form>
+            <p class="text-center text-gray-600 text-sm mt-4">
+                Already have an account? <a href="#" id="login-link-from-register" class="text-blue-600 hover:underline">Login here</a>
+            </p>
+        </section>
+
+        <section id="my-blog-posts-page" class="hidden">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-3xl font-bold text-gray-900">My Blog Posts</h2>
+                <button id="create-new-post-on-myblogs" class="bg-blue-600 text-white px-5 py-3 rounded-md hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 flex items-center">
+                    <svg data-feather="plus" class="w-5 h-5 mr-1"></svg>
+                    Create New Post
+                </button>
+            </div>
+            <div id="my-blog-posts-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                </div>
+        </section>
+
+        <div id="notification" class="hidden"></div>
+    </main>
+
+    <script src="./script.js"></script>
+    <script>
+        // Event listeners for internal page navigation links
+        document.getElementById('register-link-from-login')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage('register-page');
+        });
+        document.getElementById('login-link-from-register')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            showPage('login-page');
+        });
+
+        // Initialize Feather Icons at the end of the body
+        feather.replace();
+    </script>
+</body>
+</html>

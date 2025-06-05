@@ -1,0 +1,74 @@
+/* Custom styles for truncate-3-lines */
+        .truncate-3-lines {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        /* Hide scrollbar for webkit browsers */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+/* frontend/style.css */
+
+/* Base styles */
+body {
+    font-family: 'Inter', sans-serif; /* Ensure 'Inter' is imported/linked in your HTML */
+    background-color: #f8fafc; /* Tailwind's gray-50 equivalent */
+    line-height: 1.6; /* A good default for readability */
+    color: #333; /* Default text color for accessibility, can be overridden by Tailwind */
+}
+
+/* Styles for content within a specific wrapper (e.g., .prose or .blog-content) */
+/* This is good for markdown-rendered content or rich text areas where you want consistent styling for raw HTML tags */
+.blog-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem; /* Tailwind's rounded-lg */
+    margin: 1.5rem 0; /* Adjust as needed, corresponds to Tailwind's my-6 (for example) */
+    display: block; /* Ensures images are block-level for margin auto if centered */
+}
+
+.blog-content p {
+    margin-bottom: 1.25rem; /* Tailwind's mb-5 equivalent */
+    line-height: 1.8; /* Good for readability in long-form text */
+}
+
+.blog-content h1,
+.blog-content h2,
+.blog-content h3,
+.blog-content h4,
+.blog-content h5,
+.blog-content h6 {
+    font-weight: 600; /* Tailwind's font-semibold */
+    margin: 1.5rem 0 1rem 0; /* Adjust spacing around headings */
+}
+
+.blog-content h2 { /* Specific override for H2 if needed */
+    font-size: 1.5rem;
+}
+
+/* Custom utility for truncating text */
+.truncate-3-lines {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Ensures ... is shown at the end */
+}
+
+/* Modal transitions - these are already good for smooth opening/closing */
+.modal {
+    transition: opacity 0.25s ease;
+}
+
+.modal-container {
+    transition: transform 0.25s ease;
+}
